@@ -56,8 +56,8 @@ void heapSort(float arr[], int n)
 }
 
 // Merge Sort
-float L[N/2], R[N/2];
 
+float L[N/2], R[N/2];
 void merge(float arr[], int l, int m, int r)
 {
     int i, j, k;
@@ -148,8 +148,6 @@ int main() {
 
 
         }
-        cout << "Epoch " << i << " completed, here are the results: " << endl;
-        for (int j = 1; j <= 10; j++) cout << result[j]/i << "ms\t";
     }
 
     for (long i:result) cout << i/10 << "ms" << endl;
