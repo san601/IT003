@@ -56,8 +56,8 @@ void heapSort(float arr[], int n)
 }
 
 // Merge Sort
-
 float L[N/2], R[N/2];
+
 void merge(float arr[], int l, int m, int r)
 {
     int i, j, k;
@@ -113,43 +113,50 @@ void mergeSort(float arr[], int l, int r)
 }
 
 int main() {
-    ios_base::sync_with_stdio(false);
-    cin.tie(nullptr); cout.tie(nullptr);
+    cout << "Type a number to choose the algorithm you want to test.\n1. Sort (C++)\n2. Quicksort\n3. Heapsort\n4. Mergesort\n";
+    int choice;
+    cin >> choice;
+    //long result[] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 
-    long result[] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-    for (int i= 1; i <= 10; i++)
+    for (int testcase = 1; testcase <= 10; testcase++)
     {
-        for (int testcase = 1; testcase <= 10; testcase++)
+        string input = "test" + to_string(testcase) + ".inp";
+        ifstream inputFile(input);
+        if (!inputFile.is_open())
         {
-            string input = "test" + to_string(testcase) + ".inp";
-            ifstream inputFile(input);
-            if (!inputFile.is_open())
-            {
-                cerr << "Unable to open the file for reading." << endl;
-                return 1;
-            }
-            float value;
-            for (int i = 0; i < N; i++) {
-                inputFile >> value;
-                arr[i] = value;
-            }
-            inputFile.close();
-
-            auto clock_wait = high_resolution_clock :: now();
-            sort(arr, arr + N);
-            //quickSort(arr, 0, N-1);
-            //heapSort(arr, N);
-            //mergeSort(arr, 0, N-1);
-
-            auto clock_end = high_resolution_clock :: now();
-            auto duration = duration_cast<milliseconds>(clock_end - clock_wait);
-
-            result[testcase] += duration.count();
-
-
+            cerr << "Unable to open the file for reading." << endl;
+            return 1;
         }
-    }
+        float value;
+        for (int i = 0; i < N; i++) {
+            inputFile >> value;
+            arr[i] = value;
+        }
+        inputFile.close();
 
-    for (long i:result) cout << i/10 << "ms" << endl;
+
+
+        auto clock_wait = high_resolution_clock :: now();
+
+        switch(choice)
+        {
+            case 1:
+                sort(arr, arr + N);
+                break;
+            case 2:
+                quickSort(arr, 0, N-1);
+                break;
+            case 3:
+                heapSort(arr, N);
+                break;
+            case 4:
+                mergeSort(arr, 0, N-1);
+                break;
+        }
+        auto clock_end = high_resolution_clock :: now();
+        auto duration = duration_cast<milliseconds>(clock_end - clock_wait);
+        cout << "test" << testcase << ": " << duration.count() << "ms" << endl;
+
+    }
     return 0;
 }
