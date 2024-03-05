@@ -12,4 +12,3 @@ for i in range(1, 11):
     end = timer()
 
     print(f'Sort time for test{i}:\t{round((end-start) * 1000)}ms')
-    print(len(a))
